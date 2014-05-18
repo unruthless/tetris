@@ -11,13 +11,9 @@ Why: because Tetris is fun and OpenFrameworks is useful.
 
 ## Setup on OS X
 
-1. Download and unarchive the openFrameworks repo into *~/of*
-[http://www.openframeworks.cc/versions/v0.8.1/of_v0.8.1_osx_release.zip]
-
-2. Clone the project into a *apps/tetris* folder root
+1. Download[http://www.openframeworks.css/versions/v0.8.1/of_v0.8.1_osx_release.zip] and unarchive the openFrameworks repo into *~/of*
+2. Clone this repo into a *tetris* project folder inside a *myApps* workspace inside the *~/of/apps* directory:
 ```
-$ git clone https://github.com/unruthless/of_tetris.git ~/of/apps/tetris
+$ git clone https://github.com/unruthless/tetris.git ~/of/apps/myApps
 ```
-
 3. Build the application from Xcode.
-
