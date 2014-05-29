@@ -6,22 +6,31 @@ void ofApp::setup(){
     // Set frame rate to 60fps
     ofSetFrameRate(60);
     
-    Tetromino fullSetOfTetrominoes = Tetromino();
+    tetrominoes.push_back(new Tetromino());
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    // -- Make 'em fall --
+    for (int i = 0; i < tetrominoes.size(); i++) {
+        if (tetrominoes[i]->isOffscreen) {
 
-    fullSetOfTetrominoes.update();
+            delete tetrominoes[i];
+            tetrominoes.erase(tetrominoes.begin() + i, tetrominoes.begin() + i + 1);
+            
+        } else {
+            tetrominoes[i]->update();
+        }
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    fullSetOfTetrominoes.draw();
-
+    for (int i = 0; i < tetrominoes.size(); i++) {
+        tetrominoes[i]->draw();
+    }
+    
     ofDrawBitmapString(ofToString(ofGetFrameRate())+"fps", 10, 15);
 }
 

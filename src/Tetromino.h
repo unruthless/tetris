@@ -14,116 +14,78 @@ class Tetromino {
   
     public:
         Tetromino();
+        ~Tetromino();
+        void init();
+        void reset();
         void update();
         void draw();
+        bool isOffscreen;
 
     private:
         static float TILE_WIDTH;
         static float TILE_HEIGHT;
         static float SCREEN_WIDTH;
         static float SCREEN_HEIGHT;
+        static float TETROMINO_WIDTH;
+        static float TETROMINO_HEIGHT;
+        static float BOUNDING_BOX_WIDTH;
+        static float BOUNDING_BOX_HEIGHT;
 
-        ofPoint point[7][4] = {
-            {
-                // 'I' Tetromino
-                ofPoint(50,0),
-                ofPoint(50,50),
-                ofPoint(50,100),
-                ofPoint(50,150)
-            },
-            {
-                // 'O' Tetromino
-                ofPoint(150,0),
-                ofPoint(150,50),
-                ofPoint(200,0),
-                ofPoint(200,50)
-            },
-            {
-                // 'T' Tetromino
-                ofPoint(300,50),
-                ofPoint(350,0),
-                ofPoint(350,50),
-                ofPoint(400,50)
-            },
-            {
-                // 'J' Tetromino
-                ofPoint(550,0),
-                ofPoint(550,50),
-                ofPoint(550,100),
-                ofPoint(500,100)
-            },
-            {
-                // 'L' Tetromino
-                ofPoint(650,0),
-                ofPoint(650,50),
-                ofPoint(650,100),
-                ofPoint(700,100)
-            },
-            {
-                // 'S' Tetromino
-                ofPoint(800,50),
-                ofPoint(850,50),
-                ofPoint(850,0),
-                ofPoint(900,0)
-            },
-            {
-                // 'Z' Tetromino
-                ofPoint(1000,0),
-                ofPoint(1050,0),
-                ofPoint(1050,50),
-                ofPoint(1100,50)
-            }
+        vector<ofPoint> points;
+    
+        // 'I' Tetromino
+        ofPoint tetromino_i[4] = {
+            ofPoint(0,   0),
+            ofPoint(0,  50),
+            ofPoint(0, 100),
+            ofPoint(0, 150)
+        };
+    
+        // 'O' Tetromino
+        ofPoint tetromino_o[4] = {
+            ofPoint( 0,  0),
+            ofPoint( 0, 50),
+            ofPoint(50,  0),
+            ofPoint(50, 50)
+        };
+    
+        // 'T' Tetromino
+        ofPoint tetromino_t[4] = {
+            ofPoint(  0, 50),
+            ofPoint( 50,  0),
+            ofPoint( 50, 50),
+            ofPoint(100, 50)
+        };
+    
+        // 'J' Tetromino
+        ofPoint tetromino_j[4] = {
+            ofPoint( 50,   0),
+            ofPoint( 50,  50),
+            ofPoint( 50, 100),
+            ofPoint(  0, 100)
         };
 
-        ofPoint point_init[7][4] = {
-            {
-                // 'I' Tetromino
-                ofPoint(50,0),
-                ofPoint(50,50),
-                ofPoint(50,100),
-                ofPoint(50,150)
-            },
-            {
-                // 'O' Tetromino
-                ofPoint(150,0),
-                ofPoint(150,50),
-                ofPoint(200,0),
-                ofPoint(200,50)
-            },
-            {
-                // 'T' Tetromino
-                ofPoint(300,50),
-                ofPoint(350,0),
-                ofPoint(350,50),
-                ofPoint(400,50)
-            },
-            {
-                // 'J' Tetromino
-                ofPoint(550,0),
-                ofPoint(550,50),
-                ofPoint(550,100),
-                ofPoint(500,100)
-            },
-            {
-                // 'L' Tetromino
-                ofPoint(650,0),
-                ofPoint(650,50),
-                ofPoint(650,100),
-                ofPoint(700,100)
-            },
-            {
-                // 'S' Tetromino
-                ofPoint(800,50),
-                ofPoint(850,50),
-                ofPoint(850,0),
-                ofPoint(900,0)
-            },
-            {
-                // 'Z' Tetromino
-                ofPoint(1000,0),
-                ofPoint(1050,0),
-                ofPoint(1050,50),
-                ofPoint(1100,50)
-            }
+        // 'L' Tetromino
+        ofPoint tetromino_l[4] = {
+            ofPoint(  0,   0),
+            ofPoint(  0,  50),
+            ofPoint(  0, 100),
+            ofPoint( 50, 100)
+        };
+
+        // 'S' Tetromino
+        ofPoint tetromino_s[4] = {
+            ofPoint(   0, 50),
+            ofPoint(  50, 50),
+            ofPoint(  50,  0),
+            ofPoint( 100,  0)
+        };
+    
+        // 'Z' Tetromino
+        ofPoint tetromino_z[4] = {
+            ofPoint(   0,  0),
+            ofPoint(  50,  0),
+            ofPoint(  50, 50),
+            ofPoint( 100, 50)
         };
 };
