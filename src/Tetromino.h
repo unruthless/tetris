@@ -22,70 +22,63 @@ class Tetromino {
         bool isOffscreen;
 
     private:
-        static float TILE_WIDTH;
-        static float TILE_HEIGHT;
-        static float SCREEN_WIDTH;
-        static float SCREEN_HEIGHT;
-        static float TETROMINO_WIDTH;
-        static float TETROMINO_HEIGHT;
-        static float BOUNDING_BOX_WIDTH;
-        static float BOUNDING_BOX_HEIGHT;
+        static const float TILE_WIDTH;
+        static const float TILE_HEIGHT;
+    
+        static const float SCREEN_WIDTH;
+        static const float SCREEN_HEIGHT;
+    
+        static float tetrominoHeight;
+        static float tetrominoWidth;
+
+        static float boundingBoxWidth;
+        static float boundingBoxHeight;
 
         vector<ofPoint> points;
-    
-        // 'I' Tetromino
-        ofPoint tetromino_i[4] = {
-            ofPoint(0,   0),
-            ofPoint(0,  50),
-            ofPoint(0, 100),
-            ofPoint(0, 150)
-        };
-    
-        // 'O' Tetromino
-        ofPoint tetromino_o[4] = {
-            ofPoint( 0,  0),
-            ofPoint( 0, 50),
-            ofPoint(50,  0),
-            ofPoint(50, 50)
-        };
-    
-        // 'T' Tetromino
-        ofPoint tetromino_t[4] = {
-            ofPoint(  0, 50),
-            ofPoint( 50,  0),
-            ofPoint( 50, 50),
-            ofPoint(100, 50)
-        };
-    
-        // 'J' Tetromino
-        ofPoint tetromino_j[4] = {
-            ofPoint( 50,   0),
-            ofPoint( 50,  50),
-            ofPoint( 50, 100),
-            ofPoint(  0, 100)
-        };
 
-        // 'L' Tetromino
-        ofPoint tetromino_l[4] = {
-            ofPoint(  0,   0),
-            ofPoint(  0,  50),
-            ofPoint(  0, 100),
-            ofPoint( 50, 100)
-        };
-
-        // 'S' Tetromino
-        ofPoint tetromino_s[4] = {
-            ofPoint(   0, 50),
-            ofPoint(  50, 50),
-            ofPoint(  50,  0),
-            ofPoint( 100,  0)
-        };
-    
-        // 'Z' Tetromino
-        ofPoint tetromino_z[4] = {
-            ofPoint(   0,  0),
-            ofPoint(  50,  0),
-            ofPoint(  50, 50),
-            ofPoint( 100, 50)
+        static const int NUM_TETROMINOES = 7;
+        ofPoint const tetrominoes[NUM_TETROMINOES][4] = {
+            { // 'I' tetromino
+                ofPoint(0,   0),
+                ofPoint(0,  50),
+                ofPoint(0, 100),
+                ofPoint(0, 150)
+            },
+            { // 'O' tetromino
+                ofPoint( 0,  0),
+                ofPoint( 0, 50),
+                ofPoint(50,  0),
+                ofPoint(50, 50)
+            },
+            { // 'T' tetromino
+                ofPoint(  0, 50),
+                ofPoint( 50,  0),
+                ofPoint( 50, 50),
+                ofPoint(100, 50)
+            },
+            { // 'J' tetromino
+                ofPoint( 50,   0),
+                ofPoint( 50,  50),
+                ofPoint( 50, 100),
+                ofPoint(  0, 100)
+            },
+            { // 'L' tetromino
+                ofPoint(  0,   0),
+                ofPoint(  0,  50),
+                ofPoint(  0, 100),
+                ofPoint( 50, 100)
+            },
+            { // 'S' tetromino
+                ofPoint(   0, 50),
+                ofPoint(  50, 50),
+                ofPoint(  50,  0),
+                ofPoint( 100,  0)
+            },
+            { // 'Z' tetromino
+                ofPoint(   0,  0),
+                ofPoint(  50,  0),
+                ofPoint(  50, 50),
+                ofPoint( 100, 50)
+            }
         };
 };

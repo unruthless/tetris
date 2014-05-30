@@ -6,9 +6,16 @@
 //
 //
 
-#ifndef __tetris__Tile__
-#define __tetris__Tile__
+#pragma once
 
-#include <iostream>
+#include "ofMain.h"
 
-#endif /* defined(__tetris__Tile__) */
+class Tile {
+
+    public:
+        Tile();
+        ~Tile();
+
+    private:
+
+};
