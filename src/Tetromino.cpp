@@ -20,9 +20,6 @@ Tetromino::Tetromino(){
     
     // i o t j l s z
     
-    // Why is this constructor being called twice?
-    // ofLogNotice(ofToString());
-
     // Initialize Tetromino
     float random = ofRandom(1,7);
     int thisTetrominoIndex = floor(random + 0.5);
