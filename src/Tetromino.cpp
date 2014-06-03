@@ -8,13 +8,10 @@
 
 #include "Tetromino.h"
 
-const float Tetromino::TILE_WIDTH = 50;
-const float Tetromino::TILE_HEIGHT = 50;
-const float Tetromino::SCREEN_HEIGHT = 368;
+const float Tetromino::TILE_WIDTH = 9;
+const float Tetromino::TILE_HEIGHT = 9;
 float Tetromino::tetrominoWidth = 0;
 float Tetromino::tetrominoHeight = 0;
-float Tetromino::boundingBoxWidth = 0;
-float Tetromino::boundingBoxHeight = 0;
 
 Tetromino::Tetromino(){
     
@@ -23,7 +20,7 @@ Tetromino::Tetromino(){
     // Initialize Tetromino
     int randomIndex = floor(ofRandom(0,7));
     for (int i = 0; i < 4; i++){
-        points.push_back(tetrominoes[randomIndex][i]);
+        points.push_back(startPositions[randomIndex][i]);
     }
     
     // set the tetromino's width and height
@@ -40,27 +37,22 @@ Tetromino::Tetromino(){
     }
     
     tetrominoWidth = TILE_WIDTH + xMax;
-    tetrominoHeight = TILE_HEIGHT + yMax;
+    tetrominoHeight = TILE_HEIGHT + yMax + 1;
 }
 
 //--------------------------------------------------------------
 Tetromino::~Tetromino(){
-    ofLogNotice(ofToString("dead"));
-}
-
-//--------------------------------------------------------------
-void Tetromino::init(){
-    
+    cout << "destruction of Tetromino instance" << endl;
 }
 
 //--------------------------------------------------------------
 void Tetromino::reset(){
+    cout << "Tetromino::reset()" << endl;
+    
     // Resets the tetromino's position.
     // Called when bounding box collides with bottom of screen.
 
     points.clear();
-    boundingBoxWidth = 0;
-    boundingBoxHeight = 0;
 }
 
 //--------------------------------------------------------------
@@ -69,19 +61,14 @@ void Tetromino::update(){
     for (int i = 0; i < points.size(); i++){
 
         // Move on down
-        points[i].y++;
+        points[i].y+=10;
 
-        if (points[i].x > boundingBoxWidth) {
-            boundingBoxWidth = points[i].x;
-        }
-        if (points[i].y > boundingBoxHeight) {
-            boundingBoxHeight = points[i].y;
-        }
+        cout << "y pos" << points[i].y << " | tetromino height " << tetrominoHeight << " | screen height " <<  210 << endl;
 
-        if (boundingBoxHeight - tetrominoHeight >= SCREEN_HEIGHT) {
+        // Is this tile touching bottom?
+        if (points[i].y + TILE_WIDTH + 1 == 210) {
             isOffscreen = true;
         }
-    
     }
 }
 

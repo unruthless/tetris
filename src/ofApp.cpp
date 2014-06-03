@@ -11,13 +11,14 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+
+    // Pause
+    sleep(1);
     
     for (int i = 0; i < tetrominoes.size(); i++) {
         if (tetrominoes[i]->isOffscreen) {
-
             delete tetrominoes[i];
             tetrominoes.erase(tetrominoes.begin() + i, tetrominoes.begin() + i + 1);
-            
         } else {
             tetrominoes[i]->update();
         }

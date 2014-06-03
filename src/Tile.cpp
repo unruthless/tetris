@@ -9,7 +9,10 @@
 #include "Tile.h"
 
 Tile::Tile(){
+
+    cout << "create Tile instance" << endl;
 };
 
 Tile::~Tile(){
 };
+
