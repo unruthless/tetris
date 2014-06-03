@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "Tetromino.h"
+#include "Shape.h"
 
 class ofApp : public ofBaseApp{
 	public:
@@ -20,5 +20,5 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     
-        vector<Tetromino*> tetrominoes;
+        vector<Shape*> activeShape;
 };

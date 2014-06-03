@@ -8,6 +8,9 @@
 
 #include "Tile.h"
 
+//const float Tetromino::TILE_WIDTH = 9;
+//const float Tetromino::TILE_HEIGHT = 9;
+
 Tile::Tile(){
 
     cout << "create Tile instance" << endl;
