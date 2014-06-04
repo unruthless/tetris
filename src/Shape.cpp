@@ -19,23 +19,13 @@ Shape::Shape(){
     
     // Initialize shape
     int randomIndex = floor(ofRandom(0,7));
-    for (int i = 0; i < 4; i++){
-        points.push_back(startPositions[randomIndex][i]);
-    }
     
-    // Set the shape's width and height
-    int xMax = 0;
-    int yMax = 0;
-    for (int i = 0; i < 4; i++) {
-        if (points[i].x > xMax) {
-            xMax = points[i].x;
-        }
-        if (points[i].y > yMax) {
-            yMax = points[i].y;
-        }
+    //ofPoint points = startPositions[randomIndex];
+    
+    for (int i = 0; i < 4; i++){
+        //points.push_back(startPositions[randomIndex][i]);
+        tiles.push_back(Tile(startPositions[randomIndex][i]));
     }
-    shapeWidth = TILE_WIDTH + xMax;
-    shapeHeight = TILE_HEIGHT + yMax + 1;
 }
 
 // -------------------------------------------------------------
@@ -47,26 +37,24 @@ Shape::~Shape(){
 void Shape::draw(){
     
     ofSetColor(ofColor::black);
-    
-    for (int i = 0; i < 4; i++) {
-        ofRect(points[i].x, points[i].y, TILE_WIDTH, TILE_HEIGHT);
+
+    for (int i = 0; i < tiles.size(); i++) {
+        tiles[i].draw();
     }
 }
 
 //--------------------------------------------------------------
 void Shape::moveDown(){
     
-    for (int i = 0; i < points.size(); i++){
+    for (int i = 0; i < tiles.size(); i++){
         
         // Move on down
-        points[i].y+=10;
-        
-        cout << "y pos" << points[i].y << " | shape height " << shapeHeight << " | screen height " <<  210 << endl;
+        tiles[i].update();
         
         // Is this tile touching bottom?
-        if (points[i].y + TILE_WIDTH + 1 == 210) {
-            hasCollided = true;
-        }
+        //if (points[i].y + TILE_WIDTH + 1 == 210) {
+        //    hasCollided = true;
+        //}
     }
 }
 

@@ -9,6 +9,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Tile.h"
 
 class Shape {
   
@@ -35,8 +36,8 @@ class Shape {
     static float shapeHeight;
     static float shapeWidth;
 
-    vector<ofPoint> points;
-
+    vector<Tile> tiles;
+    
     static const int NUM_SHAPES = 7;
     ofPoint const startPositions[NUM_SHAPES][4] = {
         { // 'I' tetromino

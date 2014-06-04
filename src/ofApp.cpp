@@ -1,10 +1,14 @@
 #include "ofApp.h"
 
+unsigned long long ofApp::frameNumber;
+
 //--------------------------------------------------------------
 void ofApp::setup(){
     
     // Set frame rate to 60fps
     ofSetFrameRate(60);
+
+    frameNumber = 0;
     
     activeShape.push_back(new Shape());
 }
@@ -13,16 +17,19 @@ void ofApp::setup(){
 void ofApp::update(){
 
     // Pause for one second
-    sleep(1);
-    
-    for (int i = 0; i < activeShape.size(); i++) {
-        if (activeShape[i]->hasCollided) {
-            activeShape[i]->handleCollision();
-            break;
-            //delete activeShape[i];
-            //activeShape.erase(activeShape.begin() + i, activeShape.begin() + i + 1);
-        } else {
-            activeShape[i]->moveDown();
+    if (ofGetElapsedTimeMillis() - frameNumber > SPEED) {
+
+        frameNumber = ofGetElapsedTimeMillis();
+
+        for (int i = 0; i < activeShape.size(); i++) {
+            if (activeShape[i]->hasCollided) {
+                activeShape[i]->handleCollision();
+                break;
+                //delete activeShape[i];
+                //activeShape.erase(activeShape.begin() + i, activeShape.begin() + i + 1);
+            } else {
+                activeShape[i]->moveDown();
+            }
         }
     }
 }

@@ -13,9 +13,14 @@
 class Tile {
 
     public:
-        Tile();
+        Tile(ofPoint pt);
         ~Tile();
+        void draw();
+        void update();
 
     private:
 
+    ofPoint pt;
+    static const int TILE_WIDTH = 9;
+    static const int TILE_HEIGHT = 9;
 };

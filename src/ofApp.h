@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "Shape.h"
+#include "Row.h"
 
 class ofApp : public ofBaseApp{
 	public:
@@ -19,6 +20,9 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    
         vector<Shape*> activeShape;
+    
+private:
+    static const int SPEED = 1000;
+    static unsigned long long frameNumber;
 };
