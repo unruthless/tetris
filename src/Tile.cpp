@@ -23,6 +23,14 @@ void Tile::draw(){
     ofRect(pt.x, pt.y, TILE_WIDTH, TILE_HEIGHT);
 };
 
-void Tile::update(){
+void Tile::moveDown(){
     pt.y += 10;
+};
+
+void Tile::moveLeft(){
+    pt.x -= 10;
+};
+
+void Tile::moveRight(){
+    pt.x += 10;
 };

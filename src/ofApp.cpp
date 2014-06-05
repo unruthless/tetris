@@ -51,14 +51,23 @@ void ofApp::keyPressed(int key){
         case 356:
             // arrow left -> move left
             cout << "arrow left -> move active shape left" << endl;
+            for (int i = 0; i < activeShape.size(); i++) {
+                activeShape[i]->moveLeft();
+            }
             break;
         case 358:
             // arrow right -> move right
             cout << "arrow right -> move active shape right" << endl;
+            for (int i = 0; i < activeShape.size(); i++) {
+                activeShape[i]->moveRight();
+            }
             break;
         case 359:
             // arrow down -> move down
             cout << "arrow down -> move active shape down" << endl;
+            for (int i = 0; i < activeShape.size(); i++) {
+                activeShape[i]->moveDown();
+            }
             break;
         case 357:
             // arrow up -> drop down

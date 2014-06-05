@@ -48,13 +48,37 @@ void Shape::moveDown(){
     
     for (int i = 0; i < tiles.size(); i++){
         
-        // Move on down
-        tiles[i].update();
+        tiles[i].moveDown();
         
-        // Is this tile touching bottom?
-        //if (points[i].y + TILE_WIDTH + 1 == 210) {
-        //    hasCollided = true;
-        //}
+        // @todo
+        // check if tile has hit a tile beneath it;
+        // if so, trigger collision handler.
+    }
+}
+
+//--------------------------------------------------------------
+void Shape::moveLeft(){
+    
+    for (int i = 0; i < tiles.size(); i++){
+        
+        tiles[i].moveLeft();
+        
+        // @todo
+        // check if tile has hit left size of board;
+        // if so, don't allow left move to happen.
+    }
+}
+
+//--------------------------------------------------------------
+void Shape::moveRight(){
+    
+    for (int i = 0; i < tiles.size(); i++){
+        
+        tiles[i].moveRight();
+        
+        // @todo
+        // check if tile has hit right size of board;
+        // if so, don't allow left move to happen.
     }
 }
 

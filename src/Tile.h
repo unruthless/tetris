@@ -16,7 +16,9 @@ class Tile {
         Tile(ofPoint pt);
         ~Tile();
         void draw();
-        void update();
+        void moveDown();
+        void moveLeft();
+        void moveRight();
 
     private:
 

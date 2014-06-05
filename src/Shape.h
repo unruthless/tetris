@@ -21,6 +21,8 @@ class Shape {
     void draw();
     void moveDown();
     void dropDown();
+    void moveLeft();
+    void moveRight();
     void rotateCW();
     void rotateCCW();
 
