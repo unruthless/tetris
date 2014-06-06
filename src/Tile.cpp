@@ -34,3 +34,27 @@ void Tile::moveLeft(){
 void Tile::moveRight(){
     pt.x += 10;
 };
+
+bool Tile::isAtLeftEdge(){
+    if (pt.x == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Tile::isAtRightEdge(){
+    if (pt.x == 290) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Tile::isAtBottomEdge(){
+    if (pt.y + 9 + 1 == 420) {
+        return true;
+    } else {
+        return false;
+    }
+}

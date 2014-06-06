@@ -13,13 +13,17 @@
 class Tile {
 
     public:
-        Tile(ofPoint pt);
-        ~Tile();
-        void draw();
-        void moveDown();
-        void moveLeft();
-        void moveRight();
 
+    Tile(ofPoint pt);
+    ~Tile();
+    void draw();
+    void moveDown();
+    void moveLeft();
+    void moveRight();
+    bool isAtLeftEdge();
+    bool isAtRightEdge();
+    bool isAtBottomEdge();
+    
     private:
 
     ofPoint pt;

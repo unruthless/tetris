@@ -22,7 +22,7 @@ void ofApp::update(){
         frameNumber = ofGetElapsedTimeMillis();
 
         for (int i = 0; i < activeShape.size(); i++) {
-            if (activeShape[i]->hasCollided) {
+            if (!activeShape[i]->isMovableDown()) {
                 activeShape[i]->handleCollision();
                 break;
                 //delete activeShape[i];
@@ -52,21 +52,32 @@ void ofApp::keyPressed(int key){
             // arrow left -> move left
             cout << "arrow left -> move active shape left" << endl;
             for (int i = 0; i < activeShape.size(); i++) {
-                activeShape[i]->moveLeft();
+                if (activeShape[i]->isMovableLeft()) {
+                    activeShape[i]->moveLeft();
+                }
             }
             break;
         case 358:
             // arrow right -> move right
             cout << "arrow right -> move active shape right" << endl;
             for (int i = 0; i < activeShape.size(); i++) {
-                activeShape[i]->moveRight();
+                if (activeShape[i]->isMovableRight()) {
+                    activeShape[i]->moveRight();
+                }
             }
             break;
         case 359:
             // arrow down -> move down
             cout << "arrow down -> move active shape down" << endl;
             for (int i = 0; i < activeShape.size(); i++) {
-                activeShape[i]->moveDown();
+                if (!activeShape[i]->isMovableDown()) {
+                    activeShape[i]->handleCollision();
+                    break;
+                    //delete activeShape[i];
+                    //activeShape.erase(activeShape.begin() + i, activeShape.begin() + i + 1);
+                } else {
+                    activeShape[i]->moveDown();
+                }
             }
             break;
         case 357:

@@ -21,6 +21,9 @@ class Shape {
     void draw();
     void moveDown();
     void dropDown();
+    bool isMovableLeft();
+    bool isMovableRight();
+    bool isMovableDown();
     void moveLeft();
     void moveRight();
     void rotateCW();
@@ -39,9 +42,12 @@ class Shape {
     static float shapeWidth;
 
     vector<Tile> tiles;
+
+    // Custom Shapes: F U S E P R O J C T
+    // @todo
     
-    static const int NUM_SHAPES = 7;
-    ofPoint const startPositions[NUM_SHAPES][4] = {
+    // Standard Tetrominoes: I O T J L S Z
+    ofPoint const STANDARD_SHAPES[7][4] = {
         { // 'I' tetromino
             ofPoint(0,  0),
             ofPoint(0, 10),

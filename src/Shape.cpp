@@ -24,7 +24,7 @@ Shape::Shape(){
     
     for (int i = 0; i < 4; i++){
         //points.push_back(startPositions[randomIndex][i]);
-        tiles.push_back(Tile(startPositions[randomIndex][i]));
+        tiles.push_back(Tile(STANDARD_SHAPES[randomIndex][i]));
     }
 }
 
@@ -49,23 +49,47 @@ void Shape::moveDown(){
     for (int i = 0; i < tiles.size(); i++){
         
         tiles[i].moveDown();
-        
-        // @todo
-        // check if tile has hit a tile beneath it;
-        // if so, trigger collision handler.
     }
 }
+
+bool Shape::isMovableLeft() {
+
+    for (int i = 0; i < tiles.size(); i++){
+        if (tiles[i].isAtLeftEdge()) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+bool Shape::isMovableRight() {
+
+    for (int i = 0; i < tiles.size(); i++){
+        if (tiles[i].isAtRightEdge()) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+bool Shape::isMovableDown() {
+
+    for (int i = 0; i < tiles.size(); i++){
+        if (tiles[i].isAtBottomEdge()) {
+            return false;
+        }
+    }
+    return true;
+}
+
 
 //--------------------------------------------------------------
 void Shape::moveLeft(){
     
     for (int i = 0; i < tiles.size(); i++){
-        
         tiles[i].moveLeft();
-        
-        // @todo
-        // check if tile has hit left size of board;
-        // if so, don't allow left move to happen.
     }
 }
 
@@ -73,12 +97,7 @@ void Shape::moveLeft(){
 void Shape::moveRight(){
     
     for (int i = 0; i < tiles.size(); i++){
-        
         tiles[i].moveRight();
-        
-        // @todo
-        // check if tile has hit right size of board;
-        // if so, don't allow left move to happen.
     }
 }
 
