@@ -13,19 +13,15 @@ const float Shape::TILE_HEIGHT = 9;
 float Shape::shapeWidth = 0;
 float Shape::shapeHeight = 0;
 
+vector< vector<ofPoint> > Shapes::pts;
+const std::string Shapes::names[7] = {"I", "O", "T", "J", "L", "S", "Z"};
+
 // -------------------------------------------------------------
 Shape::Shape(){
-    cout << "Shape::Shape()" << endl;
     
     // Initialize shape
-    int randomIndex = floor(ofRandom(0,7));
-    
-    //ofPoint points = startPositions[randomIndex];
-    
-    for (int i = 0; i < 4; i++){
-        //points.push_back(startPositions[randomIndex][i]);
-        tiles.push_back(Tile(STANDARD_SHAPES[randomIndex][i]));
-    }
+    vector<ofPoint> shape = Shapes::getRandom();
+    for (int i = 0; i < shape.size(); i++) tiles.push_back(Tile(shape[i]));
 }
 
 // -------------------------------------------------------------
