@@ -13,20 +13,17 @@
 class Tile {
 
     public:
+        Tile(ofPoint pt, ofColor fill = ofColor::black, ofColor stroke = ofColor(0x333333));
+        ~Tile();
+        int x;
+        int y;
+        ofColor fill;
+        ofColor stroke;
+        void draw();
+        void drop();
+        static const int WIDTH = 20;
+        static const int HEIGHT = 20;
 
-    Tile(ofPoint pt);
-    ~Tile();
-    void draw();
-    void moveDown();
-    void moveLeft();
-    void moveRight();
-    bool isAtLeftEdge();
-    bool isAtRightEdge();
-    bool isAtBottomEdge();
-    
     private:
 
-    ofPoint pt;
-    static const int TILE_WIDTH = 9;
-    static const int TILE_HEIGHT = 9;
 };

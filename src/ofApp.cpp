@@ -1,143 +1,103 @@
 #include "ofApp.h"
 
-unsigned long long ofApp::frameNumber;
+int ofApp::numCols;
+int ofApp::numRows;
 
-//--------------------------------------------------------------
-void ofApp::setup(){
-    
-    // Set frame rate to 60fps
-    ofSetFrameRate(60);
-
+void ofApp::setup()
+{
     frameNumber = 0;
-    
-    activeShape.push_back(new Shape());
+    ofSetFrameRate(60);
+    ofSetBackgroundColor(ofColor::red);
+// build game board //
+    numCols = ofGetWidth() / Tile::WIDTH;
+    numRows = ofGetHeight() / Tile::HEIGHT;
+    Grid::init(numCols, numRows);
 }
 
-//--------------------------------------------------------------
-void ofApp::update(){
-
-    // Pause for one second
-    if (ofGetElapsedTimeMillis() - frameNumber > SPEED) {
-
+void ofApp::update()
+{
+    if (!paused && ofGetElapsedTimeMillis() - frameNumber > 200) {
+        detectVerticalCollision();
         frameNumber = ofGetElapsedTimeMillis();
-
-        for (int i = 0; i < activeShape.size(); i++) {
-            if (!activeShape[i]->isMovableDown()) {
-                activeShape[i]->handleCollision();
-                break;
-                //delete activeShape[i];
-                //activeShape.erase(activeShape.begin() + i, activeShape.begin() + i + 1);
-            } else {
-                activeShape[i]->moveDown();
-            }
-        }
     }
 }
 
-//--------------------------------------------------------------
-void ofApp::draw(){
-
-    for (int i = 0; i < activeShape.size(); i++) {
-        activeShape[i]->draw();
-    }
-    
+void ofApp::draw()
+{
+    Grid::draw();
+    tetromino.draw();
+    ofSetColor(ofColor::white);
     ofDrawBitmapString(ofToString(ofGetFrameRate())+"fps", 10, 15);
 }
 
-//--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-    
-    switch (key) {
-        case 356:
-            // arrow left -> move left
-            cout << "arrow left -> move active shape left" << endl;
-            for (int i = 0; i < activeShape.size(); i++) {
-                if (activeShape[i]->isMovableLeft()) {
-                    activeShape[i]->moveLeft();
-                }
-            }
-            break;
-        case 358:
-            // arrow right -> move right
-            cout << "arrow right -> move active shape right" << endl;
-            for (int i = 0; i < activeShape.size(); i++) {
-                if (activeShape[i]->isMovableRight()) {
-                    activeShape[i]->moveRight();
-                }
-            }
-            break;
-        case 359:
-            // arrow down -> move down
-            cout << "arrow down -> move active shape down" << endl;
-            for (int i = 0; i < activeShape.size(); i++) {
-                if (!activeShape[i]->isMovableDown()) {
-                    activeShape[i]->handleCollision();
-                    break;
-                    //delete activeShape[i];
-                    //activeShape.erase(activeShape.begin() + i, activeShape.begin() + i + 1);
-                } else {
-                    activeShape[i]->moveDown();
-                }
-            }
-            break;
-        case 357:
-            // arrow up -> drop down
-            cout << "arrow up -> drop active shape down" << endl;
-            break;
-        case 32:
-            // space bar -> pause game
-            cout << "space bar -> pause game(?)" << endl;
-            break;
-        case 97:
-            // 'a' key -> rotate left
-            cout << "'a' key -> rotate active shape 90 degrees counterclockwise" << endl;
-            break;
-        case 115:
-            // 's' key -> rotate right
-            cout << "'s' key -> rotate active shape 90 degrees clockwise" << endl;
-            break;
-        default:
-            // do nothing
-            break;
+void ofApp::keyPressed(int key)
+{
+    if (key == ' '){
+        paused = !paused;
+        ofLogNotice("paused :: "+ofToString(paused));
+    }   else if (key == OF_KEY_LEFT){
+        detectLeftCollision();
+    }   else if (key == OF_KEY_RIGHT){
+        detectRightCollision();
     }
 }
 
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-
+void ofApp::detectVerticalCollision()
+{
+    bool collision = false;
+    for (int k=0; k<tetromino.tiles.size(); k++) {
+        int tx = tetromino.tiles[k].x;
+        int ty = tetromino.tiles[k].y + Tile::HEIGHT;
+    // lookup corresponding grid tile //
+        Tile t = Grid::tiles[tx/Tile::WIDTH][ty/Tile::HEIGHT];
+        if (ty == ofGetHeight() || (t.fill != ofColor::black && tx == t.x && ty == t.y)) collision = true;
+    }
+    if (!collision) {
+        tetromino.drop();
+    }   else{
+        for (int k=0; k<tetromino.tiles.size(); k++) {
+            int tx = tetromino.tiles[k].x;
+            int ty = tetromino.tiles[k].y;
+            Grid::tiles[tx/Tile::WIDTH][ty/Tile::HEIGHT].fill = tetromino.tiles[k].fill;
+        }
+        tetromino.reset();
+    }
 }
 
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y){
-
+void ofApp::detectLeftCollision()
+{
+    bool collision = false;
+    for (int k=0; k<tetromino.tiles.size(); k++) {
+        int tx = tetromino.tiles[k].x - Tile::WIDTH;
+        int ty = tetromino.tiles[k].y;
+        if (tx < 0){
+            collision = true; break;
+        }   else{
+        // lookup corresponding grid tile //
+            Tile t = Grid::tiles[tx/Tile::WIDTH][ty/Tile::HEIGHT];
+            if (t.fill != ofColor::black && tx == t.x && ty == t.y) collision = true;
+        }
+    }
+    if (!collision) {
+        for (int i=0; i<tetromino.tiles.size(); i++) tetromino.tiles[i].x -= Tile::WIDTH;
+    }
 }
 
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+void ofApp::detectRightCollision()
+{
+    bool collision = false;
+    for (int k=0; k<tetromino.tiles.size(); k++) {
+        int tx = tetromino.tiles[k].x + Tile::WIDTH;
+        int ty = tetromino.tiles[k].y;
+        if (tx == ofGetWidth()){
+            collision = true; break;
+        }   else {
+        // lookup corresponding grid tile //
+            Tile t = Grid::tiles[tx/Tile::WIDTH][ty/Tile::HEIGHT];
+            if (t.fill != ofColor::black && tx == t.x && ty == t.y) collision = true;
+        }
+    }
+    if (!collision) {
+        for (int i=0; i<tetromino.tiles.size(); i++) tetromino.tiles[i].x += Tile::WIDTH;
+    }
 }
