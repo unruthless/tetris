@@ -35,14 +35,3 @@ void Tetromino::reset(){
     vector<ofPoint> shape = Shapes::getRandom();
     for (int i = 0; i < shape.size(); i++) tiles.push_back(Tile(shape[i], ofColor::green, ofColor::white));
 }
-
-//--------------------------------------------------------------
-void Tetromino::onKeyEvent(int key){
-    for (int i = 0; i < tiles.size(); i++){
-        if (key == OF_KEY_LEFT){
-            tiles[i].x -= Tile::WIDTH;
-        }   else if (key == OF_KEY_RIGHT){
-            tiles[i].x += Tile::WIDTH;
-        }
-    }
-}

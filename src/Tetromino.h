@@ -77,7 +77,6 @@ class Tetromino {
         void drop();
         void reset();
         vector<Tile> tiles;
-        void onKeyEvent(int key);
 
     private:
     
