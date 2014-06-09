@@ -5,7 +5,8 @@
 #include "Row.h"
 
 class ofApp : public ofBaseApp{
-	public:
+
+    public:
 		void setup();
 		void update();
 		void draw();
@@ -21,8 +22,9 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
         vector<Shape*> activeShape;
+        vector<Row*> board;
     
-private:
-    static const int SPEED = 1000;
-    static unsigned long long frameNumber;
+    private:
+        static const int SPEED = 1000;
+        static unsigned long long frameNumber;
 };

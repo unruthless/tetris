@@ -14,19 +14,19 @@ class Tile {
 
     public:
 
-    Tile(ofPoint pt);
-    ~Tile();
-    void draw();
-    void moveDown();
-    void moveLeft();
-    void moveRight();
-    bool isAtLeftEdge();
-    bool isAtRightEdge();
-    bool isAtBottomEdge();
+        Tile(ofPoint pt);
+        ~Tile();
+        void draw();
+        void moveDown();
+        void moveLeft();
+        void moveRight();
+        bool isAtLeftEdge();
+        bool isAtRightEdge();
+        bool isAtBottomEdge();
     
     private:
 
-    ofPoint pt;
-    static const int TILE_WIDTH = 9;
-    static const int TILE_HEIGHT = 9;
+        ofPoint pt;
+        static const int TILE_WIDTH = 9;
+        static const int TILE_HEIGHT = 9;
 };

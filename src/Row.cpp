@@ -9,8 +9,10 @@
 #include "Row.h"
 
 Row::Row(){
+    cout << "create Row instance" << endl;
 };
 
 Row::~Row(){
+    cout << "destroy Row instance" << endl;
 };
 

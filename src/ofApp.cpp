@@ -11,6 +11,8 @@ void ofApp::setup(){
     frameNumber = 0;
     
     activeShape.push_back(new Shape());
+    
+    //board.push_back(new Row());
 }
 
 //--------------------------------------------------------------
