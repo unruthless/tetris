@@ -31,10 +31,25 @@ void Grid::draw()
     }
 }
 
+void Grid::slideDown(int rowIndex, int cols)
+{
+    ofLogNotice("sliding all rows above "+ ofToString(rowIndex));
+
+    for (int i = rowIndex; i >= 0; i--){
+        for (int j = 0; j < cols; j++) {
+            if (i - 1 >= 0) {
+                tiles[j][i].fill = tiles[j][i - 1].fill;
+            } else {
+                tiles[j][0].fill = ofColor::black;
+            }
+        }
+    }
+}
+
 void Grid::pruneCompletedRows(int cols, int rows)
 {
-    ofLogNotice("pruning completed rows");
-
+    ofLogNotice("pruning completed rows...");
+    
     for (int i = rows - 1; i >= 0; i--) {
         bool isComplete = true;
         for (int j = 0; j < cols; j++) {
@@ -43,15 +58,8 @@ void Grid::pruneCompletedRows(int cols, int rows)
             }
         }
         if (isComplete) {
-            ofLogNotice("row is complete");
-
-            // delete the completed row
-            for (int j = 0; j < cols; j++) {
-                tiles[j][i].fill = ofColor::black;
-            }
-            
-            // move the remaining items down
-            // @todo
+            Grid::slideDown(i, cols);
+            i++;
         }
     }
 }
