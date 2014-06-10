@@ -15,6 +15,6 @@ class Grid{
         static vector< vector<Tile> > tiles;
         static void draw();
         static void init(int rows, int cols);
-    
+        static void pruneCompletedRows(int rows, int cols);
     private:
 };

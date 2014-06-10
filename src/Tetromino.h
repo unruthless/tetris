@@ -22,50 +22,65 @@ class Shapes{
                 I.push_back(ofPoint(0, Tile::HEIGHT*2));
                 I.push_back(ofPoint(0, Tile::HEIGHT*3));
                 pts.push_back(I);
+
                 vector<ofPoint> O;
                 O.push_back(ofPoint(0, 0));
                 O.push_back(ofPoint(0, Tile::HEIGHT));
                 O.push_back(ofPoint(Tile::WIDTH, 0));
                 O.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT));
                 pts.push_back(O);
+
                 vector<ofPoint> T;
                 T.push_back(ofPoint(0, Tile::HEIGHT));
                 T.push_back(ofPoint(Tile::WIDTH, 0));
                 T.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT));
                 T.push_back(ofPoint(Tile::WIDTH*2, Tile::HEIGHT));
                 pts.push_back(T);
+                
                 vector<ofPoint> J;
                 J.push_back(ofPoint(Tile::WIDTH, 0));
                 J.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT));
                 J.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT*2));
                 J.push_back(ofPoint(0, Tile::HEIGHT*2));
                 pts.push_back(J);
+                
                 vector<ofPoint> L;
                 L.push_back(ofPoint(0, 0));
                 L.push_back(ofPoint(0, Tile::HEIGHT));
                 L.push_back(ofPoint(0, Tile::HEIGHT*2));
                 L.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT*2));
                 pts.push_back(L);
+                
                 vector<ofPoint> S;
                 S.push_back(ofPoint(0, Tile::HEIGHT));
                 S.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT));
                 S.push_back(ofPoint(Tile::WIDTH, 0));
                 S.push_back(ofPoint(Tile::WIDTH*2, 0));
                 pts.push_back(S);
+                
                 vector<ofPoint> Z;
                 Z.push_back(ofPoint(0, 0));
                 Z.push_back(ofPoint(Tile::WIDTH, 0));
                 Z.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT));
                 Z.push_back(ofPoint(Tile::WIDTH*2, Tile::HEIGHT));
                 pts.push_back(Z);
+                
+                vector<ofPoint> F;
+                F.push_back(ofPoint(0,0));
+                F.push_back(ofPoint(Tile::WIDTH, 0));
+                F.push_back(ofPoint(Tile::WIDTH*2, 0));
+                F.push_back(ofPoint(0, Tile::HEIGHT));
+                F.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT));
+                F.push_back(ofPoint(0, Tile::HEIGHT*2));
+                pts.push_back(F);
             };
-            int n = floor(ofRandom(0, pts.size()-1));
-            ofLogNotice("New Tetrominoe -> "+names[n]);
+            int n = 1; /* floor(ofRandom(0, pts.size()-1)); */
+            ofLogNotice("New Tetromino -> "+names[n]);
             return pts[n];
         }
     private:
-        static const std::string names[7];
-        static vector< vector<ofPoint> > pts;
+        static const std::string names[8];
+        static vector< vector<ofPoint> > pts; // @rb what does vector< vector > mean?
 };
 
 class Tetromino {

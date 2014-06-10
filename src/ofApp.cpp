@@ -16,7 +16,7 @@ void ofApp::setup()
 
 void ofApp::update()
 {
-    if (!paused && ofGetElapsedTimeMillis() - frameNumber > 200) {
+    if (!paused && ofGetElapsedTimeMillis() - frameNumber > SPEED) {
         detectVerticalCollision();
         frameNumber = ofGetElapsedTimeMillis();
     }
@@ -45,21 +45,25 @@ void ofApp::keyPressed(int key)
 void ofApp::detectVerticalCollision()
 {
     bool collision = false;
+    
     for (int k=0; k<tetromino.tiles.size(); k++) {
         int tx = tetromino.tiles[k].x;
         int ty = tetromino.tiles[k].y + Tile::HEIGHT;
-    // lookup corresponding grid tile //
+        
+        // lookup corresponding grid tile //
         Tile t = Grid::tiles[tx/Tile::WIDTH][ty/Tile::HEIGHT];
         if (ty == ofGetHeight() || (t.fill != ofColor::black && tx == t.x && ty == t.y)) collision = true;
     }
+    
     if (!collision) {
         tetromino.drop();
-    }   else{
+    } else {
         for (int k=0; k<tetromino.tiles.size(); k++) {
             int tx = tetromino.tiles[k].x;
             int ty = tetromino.tiles[k].y;
             Grid::tiles[tx/Tile::WIDTH][ty/Tile::HEIGHT].fill = tetromino.tiles[k].fill;
         }
+        Grid::pruneCompletedRows(numCols, numRows);
         tetromino.reset();
     }
 }
