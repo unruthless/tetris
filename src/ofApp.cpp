@@ -32,14 +32,33 @@ void ofApp::draw()
 
 void ofApp::keyPressed(int key)
 {
-    if (key == ' '){
-        paused = !paused;
-        ofLogNotice("paused :: "+ofToString(paused));
-    }   else if (key == OF_KEY_LEFT){
-        detectLeftCollision();
-    }   else if (key == OF_KEY_RIGHT){
-        detectRightCollision();
+    switch (key) {
+        case ' ':
+            paused = !paused;
+            ofLogNotice("paused :: "+ofToString(paused));
+            break;
+        
+        case OF_KEY_LEFT:
+            detectLeftCollision();
+            break;
+
+        case OF_KEY_RIGHT:
+            detectRightCollision();
+            break;
+
+        case 'a':
+            tetromino.rotateCCW();
+            break;
+            
+        case 's':
+            tetromino.rotateCW();
+            break;
+            
+        default:
+            break;
     }
+    
+        //OF_KEY_BACKSPACE, OF_KEY_RETURN, OF_KEY_PRINTSCR, OF_KEY_F1 - OF_KEY_F12, OF_KEY_LEFT, OF_KEY_UP, OF_KEY_RIGHT, OF_KEY_DOWN, OF_KEY_PAGE_UP, OF_KEY_PAGE_DOWN, OF_KEY_HOME, OF_KEY_END, OF_KEY_INSERT
 }
 
 void ofApp::detectVerticalCollision()

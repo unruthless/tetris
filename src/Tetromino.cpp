@@ -35,3 +35,13 @@ void Tetromino::reset(){
     vector<ofPoint> shape = Shapes::getRandom();
     for (int i = 0; i < shape.size(); i++) tiles.push_back(Tile(shape[i], ofColor::green, ofColor::white));
 }
+
+void Tetromino::rotateCW()
+{
+    ofLogNotice("rotating clockwise");
+}
+
+void Tetromino::rotateCCW()
+{
+    ofLogNotice("rotating counterclockwise");
+}

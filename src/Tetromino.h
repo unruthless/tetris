@@ -141,6 +141,8 @@ class Tetromino {
         void draw();
         void drop();
         void reset();
+        void rotateCW();
+        void rotateCCW();
         vector<Tile> tiles;
 
     private:
