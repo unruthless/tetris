@@ -16,7 +16,7 @@ class Shapes{
         static vector<ofPoint> getRandom(){
             if (pts.empty()){
         // Standard Tetrominos: I O T J L S Z
-                vector<ofPoint> I;
+                /*vector<ofPoint> I;
                 I.push_back(ofPoint(0, 0));
                 I.push_back(ofPoint(0, Tile::HEIGHT));
                 I.push_back(ofPoint(0, Tile::HEIGHT*2));
@@ -63,7 +63,27 @@ class Shapes{
                 Z.push_back(ofPoint(Tile::WIDTH, 0));
                 Z.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT));
                 Z.push_back(ofPoint(Tile::WIDTH*2, Tile::HEIGHT));
-                pts.push_back(Z);
+                pts.push_back(Z); */
+
+                vector<ofPoint> I;
+                I.push_back(ofPoint(0, 0));
+                I.push_back(ofPoint(Tile::WIDTH, 0));
+                I.push_back(ofPoint(Tile::WIDTH * 2, 0));
+                I.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT));
+                I.push_back(ofPoint(0,Tile::HEIGHT * 2));
+                I.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT * 2));
+                I.push_back(ofPoint(Tile::WIDTH * 2, Tile::HEIGHT * 2));
+                pts.push_back(I);
+
+                vector<ofPoint> N;
+                N.push_back(ofPoint(0, 0));
+                N.push_back(ofPoint(0, Tile::HEIGHT));
+                N.push_back(ofPoint(0, Tile::HEIGHT * 2));
+                N.push_back(ofPoint(Tile::WIDTH, 0));
+                N.push_back(ofPoint(Tile::WIDTH * 2, Tile::HEIGHT * 2));
+                N.push_back(ofPoint(Tile::WIDTH * 2, Tile::HEIGHT));
+                N.push_back(ofPoint(Tile::WIDTH * 2, 0));
+                pts.push_back(N);
                 
                 vector<ofPoint> F;
                 F.push_back(ofPoint(0,0));
@@ -73,14 +93,44 @@ class Shapes{
                 F.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT));
                 F.push_back(ofPoint(0, Tile::HEIGHT*2));
                 pts.push_back(F);
+
+                vector<ofPoint> U;
+                U.push_back(ofPoint(0, 0));
+                U.push_back(ofPoint(0, Tile::HEIGHT));
+                U.push_back(ofPoint(0, Tile::HEIGHT * 2));
+                U.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT * 2));
+                U.push_back(ofPoint(Tile::WIDTH * 2, Tile::HEIGHT * 2));
+                U.push_back(ofPoint(Tile::WIDTH * 2, Tile::HEIGHT));
+                U.push_back(ofPoint(Tile::WIDTH * 2, 0));
+                pts.push_back(U);
+
+                vector<ofPoint> S;
+                S.push_back(ofPoint(Tile::WIDTH * 2, 0));
+                S.push_back(ofPoint(Tile::WIDTH, 0));
+                S.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT));
+                S.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT * 2));
+                S.push_back(ofPoint(0, Tile::HEIGHT * 2));
+                pts.push_back(S);
+
+                vector<ofPoint> E;
+                E.push_back(ofPoint(0, 0));
+                E.push_back(ofPoint(Tile::WIDTH, 0));
+                E.push_back(ofPoint(Tile::WIDTH * 2, 0));
+                E.push_back(ofPoint(0, Tile::HEIGHT));
+                E.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT));
+                E.push_back(ofPoint(0, Tile::HEIGHT * 2));
+                E.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT * 2));
+                E.push_back(ofPoint(Tile::WIDTH * 2, Tile::HEIGHT * 2));
+                pts.push_back(E);
+                
             };
-            int n = 1; /* floor(ofRandom(0, pts.size()-1)); */
+            int n = floor(ofRandom(0, pts.size()));
             ofLogNotice("New Tetromino -> "+names[n]);
             return pts[n];
         }
     private:
-        static const std::string names[8];
-        static vector< vector<ofPoint> > pts; // @rb what does vector< vector > mean?
+        static const std::string names[6];
+        static vector< vector<ofPoint> > pts;
 };
 
 class Tetromino {

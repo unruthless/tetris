@@ -9,7 +9,7 @@
 #include "Tetromino.h"
 
 vector< vector<ofPoint> > Shapes::pts;
-const std::string Shapes::names[8] = {"I", "O", "T", "J", "L", "S", "Z", "F"};
+const std::string Shapes::names[] = {"I","N","F", "U", "S", "E"};
 
 // -------------------------------------------------------------
 Tetromino::Tetromino(){

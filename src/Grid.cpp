@@ -22,6 +22,8 @@ void Grid::init(int cols, int rows)
     }
 }
 
+ 
+
 void Grid::draw()
 {
     for (int i = 0; i < tiles.size(); i++) {
