@@ -26,8 +26,8 @@ void ofApp::draw()
 {
     Grid::draw();
     tetromino.draw();
-    ofSetColor(ofColor::white);
-    ofDrawBitmapString(ofToString(ofGetFrameRate())+"fps", 10, 15);
+    /*ofSetColor(ofColor::white);
+    ofDrawBitmapString(ofToString(ofGetFrameRate())+"fps", 10, 15); */
 }
 
 void ofApp::keyPressed(int key)
@@ -44,6 +44,10 @@ void ofApp::keyPressed(int key)
 
         case OF_KEY_RIGHT:
             detectRightCollision();
+            break;
+            
+        case OF_KEY_DOWN:
+            detectVerticalCollision();
             break;
 
         case 'a':

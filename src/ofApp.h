@@ -22,6 +22,6 @@ class ofApp : public ofBaseApp{
         bool paused;
         static int numCols;
         static int numRows;
-        static const int SPEED = 200;
+        static const int SPEED = 500;
         unsigned long long frameNumber;
 };

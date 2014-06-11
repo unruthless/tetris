@@ -9,7 +9,7 @@
 #include "Tetromino.h"
 
 vector< vector<ofPoint> > Shapes::pts;
-const std::string Shapes::names[] = {"I","N","F", "U", "S", "E"};
+const std::string Shapes::names[] = {"I", "N", "F", "U", "S", "E"};
 
 // -------------------------------------------------------------
 Tetromino::Tetromino(){
@@ -23,11 +23,15 @@ Tetromino::~Tetromino(){
 
 //--------------------------------------------------------------
 void Tetromino::draw(){
-    for (int i = 0; i < tiles.size(); i++) tiles[i].draw();
+    for (int i = 0; i < tiles.size(); i++) {
+        tiles[i].draw();
+    }
 }
 
 void Tetromino::drop(){
-    for (int i = 0; i < tiles.size(); i++) tiles[i].drop();
+    for (int i = 0; i < tiles.size(); i++) {
+        tiles[i].drop();
+    }
 }
 
 void Tetromino::reset(){
@@ -39,9 +43,81 @@ void Tetromino::reset(){
 void Tetromino::rotateCW()
 {
     ofLogNotice("rotating clockwise");
+    
+    // Get the rotation origin coordinates
+    int originX = tiles[0].x;
+    int originY = tiles[0].y;
+    
+    for (int i = 0; i < tiles.size(); i++) {
+        if (originX > tiles[i].x) {
+            originX = tiles[i].x;
+        }
+        if (originY > tiles[i].y) {
+            originY = tiles[i].y;
+        }
+    }
+    
+    originX += Tile::WIDTH;
+    originY += Tile::HEIGHT;
+    
+    // For each tile,
+
+    int translatedX, translatedY;
+    int rotatedX, rotatedY;
+    
+    for (int i = 0; i < tiles.size(); i++) {
+        
+        // Translate tile coordinates to rotation origin.
+        translatedX = tiles[i].x - originX;
+        translatedY = tiles[i].y - originY;
+        
+        // Apply rotation matrix to translated coordinates.
+        rotatedX = translatedY;
+        rotatedY = translatedX * -1;
+
+        // Revert translation and apply new coordinates to tile.
+        tiles[i].x = rotatedX + originX;
+        tiles[i].y = rotatedY + originY;
+    }
 }
 
 void Tetromino::rotateCCW()
 {
     ofLogNotice("rotating counterclockwise");
+
+    // Get the rotation origin coordinates
+    int originX = tiles[0].x;
+    int originY = tiles[0].y;
+    
+    for (int i = 0; i < tiles.size(); i++) {
+        if (originX > tiles[i].x) {
+            originX = tiles[i].x;
+        }
+        if (originY > tiles[i].y) {
+            originY = tiles[i].y;
+        }
+    }
+    
+    originX += Tile::WIDTH;
+    originY += Tile::HEIGHT;
+    
+    // For each tile,
+    
+    int translatedX, translatedY;
+    int rotatedX, rotatedY;
+    
+    for (int i = 0; i < tiles.size(); i++) {
+        
+        // Translate tile coordinates to rotation origin.
+        translatedX = tiles[i].x - originX;
+        translatedY = tiles[i].y - originY;
+        
+        // Apply rotation matrix to translated coordinates.
+        rotatedX = translatedY * -1;
+        rotatedY = translatedX;
+        
+        // Revert translation and apply new coordinates to tile.
+        tiles[i].x = rotatedX + originX;
+        tiles[i].y = rotatedY + originY;
+    }
 }
