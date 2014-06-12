@@ -25,9 +25,8 @@ class Shapes {
                  *  [*]    [*][*]       [*]       [*][*]    [*][*]    [*][*]          [*][*]
                  *  [*]
                  *
-                 */
+                 
                 
-                /*
                 vector<ofPoint> I;
                 I.push_back(ofPoint(0, 0));
                 I.push_back(ofPoint(0, Tile::HEIGHT));
@@ -76,9 +75,8 @@ class Shapes {
                 Z.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT));
                 Z.push_back(ofPoint(Tile::WIDTH*2, Tile::HEIGHT));
                 pts.push_back(Z);
-                 
                 */
-    
+                
                 /**
                  *
                  *  Custom Tetrominoes:
@@ -146,13 +144,22 @@ class Shapes {
                 E.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT * 2));
                 E.push_back(ofPoint(Tile::WIDTH * 2, Tile::HEIGHT * 2));
                 pts.push_back(E);
+
+                /*
+                vector<ofPoint> L;
+                L.push_back(ofPoint(0, 0));
+                L.push_back(ofPoint(0, Tile::HEIGHT));
+                L.push_back(ofPoint(0, Tile::HEIGHT * 2));
+                L.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT * 2));
+                L.push_back(ofPoint(Tile::WIDTH * 2, Tile::HEIGHT * 2));
+                pts.push_back(L);
+                */
+                
             };
             int n = floor(ofRandom(0, pts.size()));
-            ofLogNotice("New Tetromino -> "+names[n]);
             return pts[n];
         }
     private:
-        static const std::string names[6];
         static vector< vector<ofPoint> > pts;
 };
 

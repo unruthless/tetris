@@ -12,7 +12,6 @@ vector< vector<Tile> > Grid::tiles;
 
 void Grid::init(int cols, int rows)
 {
-    ofLogNotice("grid = "+ofToString(rows) + " rows/" + ofToString(cols) + " cols");
     for (int i = 0; i < cols; i++){
         vector<Tile> row;
         for (int j = 0; j < rows; j++) {
@@ -21,8 +20,6 @@ void Grid::init(int cols, int rows)
         tiles.push_back(row);
     }
 }
-
- 
 
 void Grid::draw()
 {
@@ -35,8 +32,6 @@ void Grid::draw()
 
 void Grid::slideDown(int rowIndex, int cols)
 {
-    ofLogNotice("sliding all rows above "+ ofToString(rowIndex));
-
     for (int i = rowIndex; i >= 0; i--){
         for (int j = 0; j < cols; j++) {
             if (i - 1 >= 0) {
@@ -50,8 +45,6 @@ void Grid::slideDown(int rowIndex, int cols)
 
 void Grid::pruneCompletedRows(int cols, int rows)
 {
-    ofLogNotice("pruning completed rows...");
-    
     for (int i = rows - 1; i >= 0; i--) {
         bool isComplete = true;
         for (int j = 0; j < cols; j++) {
