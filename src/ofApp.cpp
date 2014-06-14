@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 int ofApp::numCols = 15;
-int ofApp::numRows = 24;
+int ofApp::numRows = 23;
 
 void ofApp::setup()
 {
@@ -78,7 +78,10 @@ void ofApp::detectVerticalCollision()
         
         // lookup corresponding grid tile //
         Tile t = Grid::tiles[tx/Tile::WIDTH][ty/Tile::HEIGHT];
-        if (ty == ofGetHeight() || (t.fill != ofColor::black && tx == t.x && ty == t.y)) collision = true;
+        if (ty >= Grid::HEIGHT || (t.fill != ofColor::black && tx == t.x && ty == t.y)) {
+            collision = true;
+        }
+        ofLogNotice(ofToString(ty));
     }
     
     if (!collision) {
@@ -114,7 +117,9 @@ void ofApp::detectLeftCollision()
         } else {
             // lookup corresponding grid tile //
             Tile t = Grid::tiles[tx/Tile::WIDTH][ty/Tile::HEIGHT];
-            if (t.fill != ofColor::black && tx == t.x && ty == t.y) collision = true;
+            if (t.fill != ofColor::black && tx == t.x && ty == t.y) {
+                collision = true;
+            }
         }
     }
     
@@ -134,7 +139,7 @@ void ofApp::detectRightCollision()
         int tx = tetromino.tiles[k].x + Tile::WIDTH;
         int ty = tetromino.tiles[k].y;
         
-        if (tx == ofGetWidth()){
+        if (tx == Grid::WIDTH){
             collision = true;
             break;
         } else {

@@ -16,6 +16,8 @@ class Grid{
         ~Grid() {};
         static vector< vector<Tile> > tiles;
         static void draw();
+        static const int HEIGHT;
+        static const int WIDTH;
         static void init(int rows, int cols);
         static void slideDown(int rowIndex, int cols);
         static void pruneCompletedRows(int rows, int cols);

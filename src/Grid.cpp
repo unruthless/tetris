@@ -10,8 +10,8 @@
 
 vector< vector<Tile> > Grid::tiles;
 
-
-
+const int Grid::HEIGHT = 460;
+const int Grid::WIDTH = 300;
 
 void Grid::init(int cols, int rows)
 {
