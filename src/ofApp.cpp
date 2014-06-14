@@ -1,25 +1,30 @@
 #include "ofApp.h"
 
-int ofApp::numCols;
-int ofApp::numRows;
+int ofApp::numCols = 15;
+int ofApp::numRows = 24;
 
 void ofApp::setup()
 {
     frameNumber = 0;
     ofSetFrameRate(60);
     ofSetBackgroundColor(ofColor::red);
-// build game board //
-    numCols = ofGetWidth() / Tile::WIDTH;
-    numRows = ofGetHeight() / Tile::HEIGHT;
+
     Grid::init(numCols, numRows);
 }
 
 void ofApp::update()
 {
-    if (!paused && ofGetElapsedTimeMillis() - frameNumber > SPEED) {
+    if ((!gamePaused) && (!gameOver) && (ofGetElapsedTimeMillis() - frameNumber > SPEED)) {
         detectVerticalCollision();
         frameNumber = ofGetElapsedTimeMillis();
     }
+}
+
+void ofApp::end()
+{
+    gameOver = true;
+    ofLogNotice("game over!");
+    Grid::init(numCols, numRows);
 }
 
 void ofApp::draw()
@@ -34,8 +39,7 @@ void ofApp::keyPressed(int key)
 {
     switch (key) {
         case ' ':
-            paused = !paused;
-            ofLogNotice("paused :: "+ofToString(paused));
+            gamePaused = !gamePaused;
             break;
         
         case OF_KEY_LEFT:
@@ -61,8 +65,6 @@ void ofApp::keyPressed(int key)
         default:
             break;
     }
-    
-        //OF_KEY_BACKSPACE, OF_KEY_RETURN, OF_KEY_PRINTSCR, OF_KEY_F1 - OF_KEY_F12, OF_KEY_LEFT, OF_KEY_UP, OF_KEY_RIGHT, OF_KEY_DOWN, OF_KEY_PAGE_UP, OF_KEY_PAGE_DOWN, OF_KEY_HOME, OF_KEY_END, OF_KEY_INSERT
 }
 
 void ofApp::detectVerticalCollision()
@@ -88,8 +90,12 @@ void ofApp::detectVerticalCollision()
             Grid::tiles[tx/Tile::WIDTH][ty/Tile::HEIGHT].fill = tetromino.tiles[k].fill;
         }
         Grid::pruneCompletedRows(numCols, numRows);
-        tetromino.reset();
-        
+
+        if (tetromino.totalDrops == 0) {
+            end();
+        } else {
+            tetromino.reset();
+        }
     }
 }
 
@@ -146,4 +152,3 @@ void ofApp::detectRightCollision()
         }
     }
 }
-

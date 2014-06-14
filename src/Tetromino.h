@@ -174,6 +174,7 @@ class Tetromino {
         void rotateCW();
         void rotateCCW();
         vector<Tile> tiles;
+        int totalDrops = 0;
 
     private:
     

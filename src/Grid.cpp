@@ -10,6 +10,9 @@
 
 vector< vector<Tile> > Grid::tiles;
 
+
+
+
 void Grid::init(int cols, int rows)
 {
     for (int i = 0; i < cols; i++){

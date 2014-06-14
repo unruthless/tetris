@@ -12,6 +12,8 @@
 class Grid{
   
     public:
+        Grid() {};
+        ~Grid() {};
         static vector< vector<Tile> > tiles;
         static void draw();
         static void init(int rows, int cols);

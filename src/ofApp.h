@@ -10,6 +10,7 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
+        void end();
         void detectVerticalCollision();
         void detectLeftCollision();
         void detectRightCollision();
@@ -19,7 +20,8 @@ class ofApp : public ofBaseApp{
         Tetromino tetromino;
     
     private:
-        bool paused;
+        bool gamePaused;
+        bool gameOver;
         static int numCols;
         static int numRows;
         static const int SPEED = 500;

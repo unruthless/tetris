@@ -28,6 +28,7 @@ void Tetromino::draw(){
 }
 
 void Tetromino::drop(){
+    totalDrops++;
     for (int i = 0; i < tiles.size(); i++) {
         tiles[i].drop();
     }
@@ -36,7 +37,10 @@ void Tetromino::drop(){
 void Tetromino::reset(){
     tiles.clear();
     vector<ofPoint> shape = Shapes::getRandom();
-    for (int i = 0; i < shape.size(); i++) tiles.push_back(Tile(shape[i], ofColor::green, ofColor::white));
+    for (int i = 0; i < shape.size(); i++) {
+        tiles.push_back(Tile(shape[i], ofColor::green, ofColor::white));
+    }
+    totalDrops = 0;
 }
 
 void Tetromino::rotateCW()
