@@ -24,8 +24,7 @@ class Shapes {
                  *  [*]    [*][*]    [*][*][*]       [*]    [*]          [*][*]    [*][*]
                  *  [*]    [*][*]       [*]       [*][*]    [*][*]    [*][*]          [*][*]
                  *  [*]
-                 *
-                 
+                 */
                 
                 vector<ofPoint> I;
                 I.push_back(ofPoint(0, 0));
@@ -75,7 +74,7 @@ class Shapes {
                 Z.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT));
                 Z.push_back(ofPoint(Tile::WIDTH*2, Tile::HEIGHT));
                 pts.push_back(Z);
-                */
+                
                 
                 /**
                  *
@@ -85,7 +84,7 @@ class Shapes {
                  *     [*]      [*]   [*]   [*][*]      [*]   [*]      [*]      [*][*]
                  *  [*][*][*]   [*]   [*]   [*]         [*][*][*]   [*][*]      [*][*][*]
                  *
-                 */
+                 *
                 
                 vector<ofPoint> I;
                 I.push_back(ofPoint(0, 0));
@@ -144,15 +143,6 @@ class Shapes {
                 E.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT * 2));
                 E.push_back(ofPoint(Tile::WIDTH * 2, Tile::HEIGHT * 2));
                 pts.push_back(E);
-
-                /*
-                vector<ofPoint> L;
-                L.push_back(ofPoint(0, 0));
-                L.push_back(ofPoint(0, Tile::HEIGHT));
-                L.push_back(ofPoint(0, Tile::HEIGHT * 2));
-                L.push_back(ofPoint(Tile::WIDTH, Tile::HEIGHT * 2));
-                L.push_back(ofPoint(Tile::WIDTH * 2, Tile::HEIGHT * 2));
-                pts.push_back(L);
                 */
                 
             };
