@@ -18,7 +18,7 @@ void Grid::init(int cols, int rows)
     for (int i = 0; i < cols; i++){
         vector<Tile> row;
         for (int j = 0; j < rows; j++) {
-            row.push_back(Tile(ofPoint(i * Tile::WIDTH, j * Tile::HEIGHT)));
+            row.push_back(Tile(ofPoint(i * Tile::WIDTH, j * Tile::HEIGHT), ofColor::black));
         }
         tiles.push_back(row);
     }

@@ -148,7 +148,8 @@ class Shapes {
             };
             int n = floor(ofRandom(0, pts.size()));
             return pts[n];
-        }
+        };
+
     private:
         static vector< vector<ofPoint> > pts;
 };

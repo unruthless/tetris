@@ -1,8 +1,10 @@
 #pragma once
 
+#include "Game.h"
 #include "Grid.h"
 #include "Tetromino.h"
 #include "ofMain.h"
+#include "callback.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -15,6 +17,7 @@ class ofApp : public ofBaseApp{
         void detectLeftCollision();
         void detectRightCollision();
 		void keyPressed(int key);
+        inline void setGameOverCallback(const util::Callback<void ()>& callback) { onGameOver = callback; }
     
         Grid grid;
         Tetromino tetromino;

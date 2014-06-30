@@ -13,7 +13,7 @@
 class Tile {
 
     public:
-        Tile(ofPoint pt, ofColor fill = ofColor::black, ofColor stroke = ofColor(0x333333));
+        Tile(ofPoint pt, ofColor fill, ofColor stroke = ofColor(0x333333));
         ~Tile();
         int x;
         int y;

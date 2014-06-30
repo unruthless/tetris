@@ -37,10 +37,25 @@ void Tetromino::drop(){
 void Tetromino::reset(){
     tiles.clear();
     vector<ofPoint> shape = Shapes::getRandom();
+
+    ofColor colors[5] = {
+                            ofColor::green,
+                            ofColor::pink,
+                            ofColor::red,
+                            ofColor::aliceBlue,
+                            ofColor::orange
+                        };
+
+    int thisColorIndex = ofRandom(0, shape.size());
+    
     for (int i = 0; i < shape.size(); i++) {
-        tiles.push_back(Tile(shape[i], ofColor::green, ofColor::white));
+        tiles.push_back(Tile(shape[i], colors[thisColorIndex], ofColor::white));
     }
     totalDrops = 0;
+
+    //ofSetColor( ofRandom(0,255), ofRandom(0,255) , ofRandom(0,255) );
+
+
 }
 
 void Tetromino::rotateCW()

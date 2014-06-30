@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8AED90BB1944F1C7004D9CF7 /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AED90B91944F1C7004D9CF7 /* Grid.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		D41BC1341961FE180092FE72 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41BC1321961FE180092FE72 /* Game.cpp */; };
 		D4DB8ABA1937F39300C6BDA2 /* Tile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4DB8AB81937F39300C6BDA2 /* Tile.cpp */; };
 		D4FF7C97192A762B008D3DEA /* Tetromino.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4FF7C95192A762B008D3DEA /* Tetromino.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
@@ -65,6 +66,8 @@
 		8AED90B91944F1C7004D9CF7 /* Grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Grid.cpp; sourceTree = "<group>"; };
 		8AED90BA1944F1C7004D9CF7 /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		D41BC1321961FE180092FE72 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		D41BC1331961FE180092FE72 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		D4DB8AB81937F39300C6BDA2 /* Tile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tile.cpp; sourceTree = "<group>"; };
 		D4DB8AB91937F39300C6BDA2 /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tile.h; sourceTree = "<group>"; };
 		D4FF7C95192A762B008D3DEA /* Tetromino.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tetromino.cpp; sourceTree = "<group>"; };
@@ -198,6 +201,8 @@
 				D4DB8AB91937F39300C6BDA2 /* Tile.h */,
 				8AED90B91944F1C7004D9CF7 /* Grid.cpp */,
 				8AED90BA1944F1C7004D9CF7 /* Grid.h */,
+				D41BC1321961FE180092FE72 /* Game.cpp */,
+				D41BC1331961FE180092FE72 /* Game.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -301,6 +306,7 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				D4FF7C97192A762B008D3DEA /* Tetromino.cpp in Sources */,
 				8AED90BB1944F1C7004D9CF7 /* Grid.cpp in Sources */,
+				D41BC1341961FE180092FE72 /* Game.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				D4DB8ABA1937F39300C6BDA2 /* Tile.cpp in Sources */,
 			);

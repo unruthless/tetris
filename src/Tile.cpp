@@ -24,8 +24,7 @@ void Tile::draw()
         ofSetColor(stroke);
         ofRect(x, y, WIDTH, HEIGHT);
         ofFill();
-        //ofSetColor(fill);
-        ofSetColor( ofRandom(0,255), ofRandom(0,255) , ofRandom(0,255) );
+        ofSetColor(fill);
         ofRect(x+1, y+1, WIDTH-2, HEIGHT-2);
     }; ofPopStyle();
 };
