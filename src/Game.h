@@ -12,9 +12,9 @@
 class Game{
     
     public:
-        Game() {};
-        ~Game() {};
-        onGameOver() {};
+        Game();
+        ~Game();
+        void onGameOver();
 
     private:
-}
+};
