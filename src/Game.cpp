@@ -11,7 +11,6 @@
 
 Game::Game(){
     Grid myGrid = *new Grid();
-    myGrid.setGameOverCallback(BIND_MEM_CB(&Game:: onGameOver, this));
 }
 
 Game::~Game(){

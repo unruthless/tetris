@@ -20,7 +20,6 @@ class Tile {
         ofColor fill;
         ofColor stroke;
         void draw();
-        void drop();
         static const int WIDTH = 20;
         static const int HEIGHT = 20;
 

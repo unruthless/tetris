@@ -28,8 +28,3 @@ void Tile::draw()
         ofRect(x+1, y+1, WIDTH-2, HEIGHT-2);
     }; ofPopStyle();
 };
-
-void Tile::drop()
-{
-    y += HEIGHT;
-};

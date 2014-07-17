@@ -160,10 +160,18 @@ class Tetromino {
         Tetromino();
         ~Tetromino();
         void draw();
-        void drop();
         void reset();
-        void rotateCW();
-        void rotateCCW();
+
+        vector<Tile> calculateRotationCW();
+        vector<Tile> calculateRotationCCW();
+
+        vector<Tile> calculateTranslationL();
+        vector<Tile> calculateTranslationR();
+        vector<Tile> calculateTranslationD();
+
+        void transform( vector<Tile> transformedTiles );
+        void drop( vector<Tile> transformedTiles );
+
         vector<Tile> tiles;
         int totalDrops = 0;
 

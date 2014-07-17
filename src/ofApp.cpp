@@ -14,8 +14,15 @@ void ofApp::setup()
 
 void ofApp::update()
 {
+    vector<Tile> transformedTiles;
+
     if ((!gamePaused) && (!gameOver) && (ofGetElapsedTimeMillis() - frameNumber > SPEED)) {
-        detectVerticalCollision();
+        transformedTiles = tetromino.calculateTranslationD();
+        if (!detectBottomCollision(transformedTiles)){
+            tetromino.drop(transformedTiles);
+        } else {
+            handleBottomCollision();
+        }
         frameNumber = ofGetElapsedTimeMillis();
     }
 }
@@ -37,29 +44,46 @@ void ofApp::draw()
 
 void ofApp::keyPressed(int key)
 {
+    vector<Tile> transformedTiles;
+    
     switch (key) {
         case ' ':
             gamePaused = !gamePaused;
             break;
         
         case OF_KEY_LEFT:
-            detectLeftCollision();
+            transformedTiles = tetromino.calculateTranslationL();
+            if (!detectLeftCollision(transformedTiles)) {
+                tetromino.transform(transformedTiles);
+            }
             break;
 
         case OF_KEY_RIGHT:
-            detectRightCollision();
+            transformedTiles = tetromino.calculateTranslationR();
+            if (!detectRightCollision(transformedTiles)) {
+                tetromino.transform(transformedTiles);
+            }
             break;
             
         case OF_KEY_DOWN:
-            detectVerticalCollision();
+            transformedTiles = tetromino.calculateTranslationD();
+            if (!detectBottomCollision(transformedTiles)){
+                tetromino.drop(transformedTiles);
+            }
             break;
 
         case 'a':
-            tetromino.rotateCW();
+            transformedTiles = tetromino.calculateRotationCW();
+            if (!detectLeftCollision(transformedTiles) && !detectRightCollision(transformedTiles)) {
+                tetromino.transform(transformedTiles);
+            }
             break;
 
         case 's':
-            tetromino.rotateCCW();
+            transformedTiles = tetromino.calculateRotationCCW();
+            if (!detectLeftCollision(transformedTiles) && !detectRightCollision(transformedTiles)) {
+                tetromino.transform(transformedTiles);
+            }
             break;
             
         default:
@@ -67,93 +91,84 @@ void ofApp::keyPressed(int key)
     }
 }
 
-void ofApp::detectVerticalCollision()
+bool ofApp::detectBottomCollision( vector<Tile> tiles )
 {
     bool collision = false;
     
-    for (int k=0; k<tetromino.tiles.size(); k++) {
-        
-        int tx = tetromino.tiles[k].x;
-        int ty = tetromino.tiles[k].y + Tile::HEIGHT;
-        
-        // lookup corresponding grid tile //
-        Tile t = Grid::tiles[tx/Tile::WIDTH][ty/Tile::HEIGHT];
-        if (ty >= Grid::HEIGHT || (t.fill != ofColor::black && tx == t.x && ty == t.y)) {
+    for (int i = 0; i < tiles.size(); i++) {
+        if (tiles[i].y >= Grid::HEIGHT) {
+            // have we hit the bottom of the screen?
             collision = true;
+            break;
+        } else {
+            // have we hit an existing tile?
+            Tile t = Grid::tiles[tiles[i].x/Tile::WIDTH][tiles[i].y/Tile::HEIGHT];
+            if (t.fill != ofColor::black && tiles[i].x == t.x && tiles[i].y == t.y) {
+                collision = true;
+                break;
+            }
         }
-        ofLogNotice(ofToString(ty));
     }
     
-    if (!collision) {
-        tetromino.drop();
+    return (collision) ? true : false;
+}
+
+void ofApp::handleBottomCollision() {
+    
+    for (int i = 0; i < tetromino.tiles.size(); i++) {
+        Grid::tiles[ tetromino.tiles[i].x / Tile::WIDTH ][ tetromino.tiles[i].y / Tile::HEIGHT ].fill = tetromino.tiles[i].fill;
+    }
+    Grid::pruneCompletedRows(numCols, numRows);
+    
+    if (tetromino.totalDrops == 0) {
+        end();
     } else {
-        for (int k=0; k<tetromino.tiles.size(); k++) {
-            int tx = tetromino.tiles[k].x;
-            int ty = tetromino.tiles[k].y;
-            Grid::tiles[tx/Tile::WIDTH][ty/Tile::HEIGHT].fill = tetromino.tiles[k].fill;
-        }
-        Grid::pruneCompletedRows(numCols, numRows);
-
-        if (tetromino.totalDrops == 0) {
-            end();
-        } else {
-            tetromino.reset();
-        }
+        tetromino.reset();
     }
 }
 
-void ofApp::detectLeftCollision()
+bool ofApp::detectLeftCollision( vector<Tile> tiles )
 {
     bool collision = false;
     
-    for (int k=0; k<tetromino.tiles.size(); k++) {
+    for (int i = 0; i < tiles.size(); i++) {
         
-        int tx = tetromino.tiles[k].x - Tile::WIDTH;
-        int ty = tetromino.tiles[k].y;
-        
-        if (tx < 0){
+        if (tiles[i].x < 0) {
+            // have we hit the left side of the screen?
             collision = true;
             break;
         } else {
-            // lookup corresponding grid tile //
-            Tile t = Grid::tiles[tx/Tile::WIDTH][ty/Tile::HEIGHT];
-            if (t.fill != ofColor::black && tx == t.x && ty == t.y) {
+            // have we hit an existing tile?
+            Tile t = Grid::tiles[ tiles[i].x / Tile::WIDTH ][ tiles[i].y / Tile::HEIGHT ]; // there's something buggy here
+            if (t.fill != ofColor::black && tiles[i].x == t.x && tiles[i].y == t.y) {
                 collision = true;
+                break;
+            }
+        }
+    }
+
+    return (collision) ? true : false;
+}
+
+bool ofApp::detectRightCollision( vector<Tile> tiles )
+{
+    bool collision = false;
+    
+    for (int i = 0; i < tiles.size(); i++) {
+        
+        if (tiles[i].x == Grid::WIDTH){
+            // have we hit the right side of the screen?
+            collision = true;
+            break;
+        } else {
+            // have we hit an existing tile?a
+            Tile t = Grid::tiles[tiles[i].x/Tile::WIDTH][tiles[i].y/Tile::HEIGHT];
+            if (t.fill != ofColor::black && tiles[i].x == t.x && tiles[i].y == t.y) {
+                collision = true;
+                break;
             }
         }
     }
     
-    if (!collision) {
-        for (int i=0; i<tetromino.tiles.size(); i++) {
-            tetromino.tiles[i].x -= Tile::WIDTH;
-        }
-    }
-}
-
-void ofApp::detectRightCollision()
-{
-    bool collision = false;
-    
-    for (int k=0; k<tetromino.tiles.size(); k++) {
-        
-        int tx = tetromino.tiles[k].x + Tile::WIDTH;
-        int ty = tetromino.tiles[k].y;
-        
-        if (tx == Grid::WIDTH){
-            collision = true;
-            break;
-        } else {
-            // lookup corresponding grid tile //
-            Tile t = Grid::tiles[tx/Tile::WIDTH][ty/Tile::HEIGHT];
-            if (t.fill != ofColor::black && tx == t.x && ty == t.y) {
-                collision = true;
-            }
-        }
-    }
-    
-    if (!collision) {
-        for (int i=0; i<tetromino.tiles.size(); i++) {
-            tetromino.tiles[i].x += Tile::WIDTH;
-        }
-    }
+    return (collision) ? true : false;
 }

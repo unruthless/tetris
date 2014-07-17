@@ -27,13 +27,7 @@ void Tetromino::draw(){
     }
 }
 
-void Tetromino::drop(){
-    totalDrops++;
-    for (int i = 0; i < tiles.size(); i++) {
-        tiles[i].drop();
-    }
-}
-
+//--------------------------------------------------------------
 void Tetromino::reset(){
     tiles.clear();
     vector<ofPoint> shape = Shapes::getRandom();
@@ -54,88 +48,140 @@ void Tetromino::reset(){
     totalDrops = 0;
 
     //ofSetColor( ofRandom(0,255), ofRandom(0,255) , ofRandom(0,255) );
-
-
 }
 
-void Tetromino::rotateCW()
+//--------------------------------------------------------------
+void Tetromino::transform(vector<Tile> transformedTiles)
 {
-    ofLogNotice("rotating clockwise");
+    tiles = transformedTiles;
+}
+
+//--------------------------------------------------------------
+void Tetromino::drop(vector<Tile> transformedTiles){
+    totalDrops++;
+    tiles = transformedTiles;
+    
+    /*for (int i = 0; i < tiles.size(); i++) {
+     tiles[i].drop();
+     }*/
+}
+
+//--------------------------------------------------------------
+vector<Tile> Tetromino::calculateRotationCW()
+{
+    vector<Tile> rotatedTiles = tiles;
     
     // Get the rotation origin coordinates
-    int originX = tiles[0].x;
-    int originY = tiles[0].y;
-    
-    for (int i = 0; i < tiles.size(); i++) {
-        if (originX > tiles[i].x) {
-            originX = tiles[i].x;
+    int originX = rotatedTiles[0].x;
+    int originY = rotatedTiles[0].y;
+
+    for (int i = 0; i < rotatedTiles.size(); i++) {
+        if (originX > rotatedTiles[i].x) {
+            originX = rotatedTiles[i].x;
         }
-        if (originY > tiles[i].y) {
-            originY = tiles[i].y;
+        if (originY > rotatedTiles[i].y) {
+            originY = rotatedTiles[i].y;
         }
     }
     
     originX += Tile::WIDTH;
     originY += Tile::HEIGHT;
-    
-    // For each tile,
 
     int translatedX, translatedY;
     int rotatedX, rotatedY;
     
-    for (int i = 0; i < tiles.size(); i++) {
+    for (int i = 0; i < rotatedTiles.size(); i++) {
         
         // Translate tile coordinates to rotation origin.
-        translatedX = tiles[i].x - originX;
-        translatedY = tiles[i].y - originY;
+        translatedX = rotatedTiles[i].x - originX;
+        translatedY = rotatedTiles[i].y - originY;
         
         // Apply rotation matrix to translated coordinates.
         rotatedX = translatedY;
         rotatedY = translatedX * -1;
-
+        
         // Revert translation and apply new coordinates to tile.
-        tiles[i].x = rotatedX + originX;
-        tiles[i].y = rotatedY + originY;
+        rotatedTiles[i].x = rotatedX + originX;
+        rotatedTiles[i].y = rotatedY + originY;
     }
+    
+    return rotatedTiles;
 }
 
-void Tetromino::rotateCCW()
+//--------------------------------------------------------------
+vector<Tile> Tetromino::calculateRotationCCW()
 {
-    ofLogNotice("rotating counterclockwise");
-
-    // Get the rotation origin coordinates
-    int originX = tiles[0].x;
-    int originY = tiles[0].y;
+    vector<Tile> rotatedTiles = tiles;
     
-    for (int i = 0; i < tiles.size(); i++) {
-        if (originX > tiles[i].x) {
-            originX = tiles[i].x;
+    // Get the rotation origin coordinates
+    int originX = rotatedTiles[0].x;
+    int originY = rotatedTiles[0].y;
+    
+    for (int i = 0; i < rotatedTiles.size(); i++) {
+        if (originX > rotatedTiles[i].x) {
+            originX = rotatedTiles[i].x;
         }
-        if (originY > tiles[i].y) {
-            originY = tiles[i].y;
+        if (originY > rotatedTiles[i].y) {
+            originY = rotatedTiles[i].y;
         }
     }
     
     originX += Tile::WIDTH;
     originY += Tile::HEIGHT;
-    
-    // For each tile,
-    
+
     int translatedX, translatedY;
     int rotatedX, rotatedY;
     
-    for (int i = 0; i < tiles.size(); i++) {
+    for (int i = 0; i < rotatedTiles.size(); i++) {
         
         // Translate tile coordinates to rotation origin.
-        translatedX = tiles[i].x - originX;
-        translatedY = tiles[i].y - originY;
+        translatedX = rotatedTiles[i].x - originX;
+        translatedY = rotatedTiles[i].y - originY;
         
         // Apply rotation matrix to translated coordinates.
         rotatedX = translatedY * -1;
         rotatedY = translatedX;
         
         // Revert translation and apply new coordinates to tile.
-        tiles[i].x = rotatedX + originX;
-        tiles[i].y = rotatedY + originY;
+        rotatedTiles[i].x = rotatedX + originX;
+        rotatedTiles[i].y = rotatedY + originY;
     }
+    
+    return rotatedTiles;
+}
+
+//--------------------------------------------------------------
+vector<Tile> Tetromino::calculateTranslationL()
+{
+    vector<Tile> translatedTiles = tiles;
+
+    for (int i = 0; i < translatedTiles.size(); i++) {
+        translatedTiles[i].x -= Tile::WIDTH;
+    }
+    
+    return translatedTiles;
+}
+
+//--------------------------------------------------------------
+vector<Tile> Tetromino::calculateTranslationR()
+{
+    vector<Tile> translatedTiles = tiles;
+
+    for (int i = 0; i < translatedTiles.size(); i++) {
+        translatedTiles[i].x += Tile::WIDTH;
+    }
+    
+    return translatedTiles;
+}
+
+//--------------------------------------------------------------
+vector<Tile> Tetromino::calculateTranslationD()
+{
+    vector<Tile> translatedTiles = tiles;
+    
+    for (int i = 0; i < translatedTiles.size(); i++) {
+        translatedTiles[i].y += Tile::HEIGHT;
+    }
+    
+    return translatedTiles;
 }
